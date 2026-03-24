@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logoText from '../assets/logo-text.png';
 
 const Logo = ({ className = "", variant = "navbar", onClick, light = false }) => {
   const isFooter = variant === "footer";
@@ -12,8 +13,8 @@ const Logo = ({ className = "", variant = "navbar", onClick, light = false }) =>
       ? "flex flex-col items-center md:items-start gap-0" 
       : "flex items-center gap-1.5";
 
-  // Use the uploaded image for the logo
-  const logoSrc = "/logo-text.png";
+  // Use the imported image for the logo
+  const logoSrc = logoText;
   
   const logoHeight = isStacked 
     ? "h-12 md:h-16 lg:h-20" 
