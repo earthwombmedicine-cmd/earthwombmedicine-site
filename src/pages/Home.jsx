@@ -29,7 +29,6 @@ import CirclePortrait from '../components/CirclePortrait';
 import GrainOverlay from '../components/GrainOverlay';
 import useGrainFilter from '../hooks/useGrainFilter';
 import VineDivider from '../components/VineDivider';
-import logoIcon from '../assets/logo-icon.png';
 
 export default function Home() {
   const [formState, setFormState] = useState({
@@ -104,7 +103,7 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[100svh] pt-[56px] md:pt-[72px] pb-16 px-5">
           <SectionReveal delay={0.3} className="flex flex-col items-center">
             <img 
-              src={logoIcon} 
+              src="https://ik.imagekit.io/eufixlduid/logo-icon%20(1).png" 
               alt="Earth Womb Medicine Icon" 
               className="h-20 md:h-28 w-auto object-contain mb-8 mx-auto opacity-80"
               referrerPolicy="no-referrer"
