@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Sparkles, Instagram, Youtube, Linkedin, MessageCircle } from "lucide-react";
+import { Sparkles, Instagram, Youtube, MessageCircle } from "lucide-react";
 import JaguarEyes from "./JaguarEyes";
 import JaguarPrintField from "./JaguarPrintField";
 import Logo from "./Logo";
@@ -58,22 +58,13 @@ export default function Footer() {
             <Instagram size={24} />
           </a>
           <a 
-            href="#" 
+            href="https://www.youtube.com/@earthwombmedicine" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-[#D4AF64] hover:opacity-80 transition-opacity"
             aria-label="YouTube"
           >
             <Youtube size={24} />
-          </a>
-          <a 
-            href="#" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-[#D4AF64] hover:opacity-80 transition-opacity"
-            aria-label="LinkedIn"
-          >
-            <Linkedin size={24} />
           </a>
           <a 
             href="https://wa.me/PLACEHOLDER" 
