@@ -75,6 +75,7 @@ export default function Connect() {
       <Helmet>
         <title>Connect | Earth Womb Medicine | Shama Igatpuriwala</title>
         <meta name="description" content="Reach out to Shama for breathwork, yoga, or shamanic practices. Begin with a conversation or write a message." />
+        <link rel="canonical" href="https://ais-pre-y4nqyrvkxpky4p2wd33fr2-253709842157.asia-southeast1.run.app/connect" />
       </Helmet>
 
       <audio ref={audioRef} src="/audio/forest-morning.mp3" />

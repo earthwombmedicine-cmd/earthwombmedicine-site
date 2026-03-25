@@ -66,6 +66,7 @@ export default function HowItWorks() {
       <Helmet>
         <title>How It Works | Earth Womb Medicine | Breathwork & Somatics</title>
         <meta name="description" content="Understand the science and spirit of Conscious Connected Breathwork, Yoga, and Shamanic Practices." />
+        <link rel="canonical" href="https://ais-pre-y4nqyrvkxpky4p2wd33fr2-253709842157.asia-southeast1.run.app/how-it-works" />
       </Helmet>
 
       {/* SECTION 1: HERO */}

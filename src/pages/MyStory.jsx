@@ -93,6 +93,7 @@ export default function MyStory() {
       <Helmet>
         <title>My Story | Shama Igatpuriwala | Earth Womb Medicine</title>
         <meta name="description" content="A story of returning to the body. Shama's journey through yoga, Trika Tantra, and breathwork." />
+        <link rel="canonical" href="https://ais-pre-y4nqyrvkxpky4p2wd33fr2-253709842157.asia-southeast1.run.app/my-story" />
       </Helmet>
 
       {/* SECTION 1: HERO */}

@@ -133,6 +133,7 @@ export default function Offerings() {
       <Helmet>
         <title>Offerings | Earth Womb Medicine</title>
         <meta name="description" content="Explore our offerings in Conscious Connected Breathwork and somatic healing. A space to land back in your body." />
+        <link rel="canonical" href="https://ais-pre-y4nqyrvkxpky4p2wd33fr2-253709842157.asia-southeast1.run.app/offerings" />
       </Helmet>
 
       {/* SECTION 1: HERO */}

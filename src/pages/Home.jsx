@@ -79,9 +79,31 @@ export default function Home() {
       <Helmet>
         <title>Earth Womb Medicine | Breathwork, Yoga & Shamanic Practices</title>
         <meta name="description" content="A space for somatic healing, breathwork, and returning to the body. Guided by Shama Igatpuriwala in Mumbai." />
+        <link rel="canonical" href="https://ais-pre-y4nqyrvkxpky4p2wd33fr2-253709842157.asia-southeast1.run.app/" />
         <meta property="og:title" content="Earth Womb Medicine | Somatic Healing" />
         <meta property="og:description" content="Land back into your body. Breathwork, Yoga, and Shamanic Practices for deep release and reconnection." />
         <meta property="og:image" content="https://picsum.photos/seed/forest-mist/1200/630" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "HealthAndBeautyBusiness",
+              "name": "Earth Womb Medicine",
+              "alternateName": "Shama Igatpuriwala",
+              "url": "https://ais-pre-y4nqyrvkxpky4p2wd33fr2-253709842157.asia-southeast1.run.app/",
+              "logo": "https://ik.imagekit.io/eufixlduid/logo-icon%20(1).png",
+              "description": "A space for somatic healing, breathwork, and returning to the body. Guided by Shama Igatpuriwala in Mumbai.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Mumbai",
+                "addressCountry": "IN"
+              },
+              "sameAs": [
+                "https://linktr.ee/earthwombmedicine"
+              ]
+            }
+          `}
+        </script>
       </Helmet>
 
       {/* SECTION 1: HERO - "Arrival & Soft Landing" */}

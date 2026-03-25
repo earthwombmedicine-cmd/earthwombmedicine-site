@@ -86,6 +86,7 @@ export default function TransformationStories() {
       <Helmet>
         <title>Transformation Stories | Earth Womb Medicine | Somatic Shifts</title>
         <meta name="description" content="Real stories of shift and release. How breathwork and shamanic practices help move what has been held." />
+        <link rel="canonical" href="https://ais-pre-y4nqyrvkxpky4p2wd33fr2-253709842157.asia-southeast1.run.app/transformation-stories" />
       </Helmet>
 
       {/* SECTION 1: HERO */}
