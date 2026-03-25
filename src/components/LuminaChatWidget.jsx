@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, X, Send } from "lucide-react";
 import { GoogleGenAI } from "@google/genai";
+import ReactMarkdown from "react-markdown";
 import { submitForm } from "../lib/submitForm";
 
 const SYSTEM_PROMPT = `You are Lumina, the AI guide for Earth Womb Medicine. Your presence is helpful, friendly, and professional. You speak with a gentle, grounded, and unhurried tone. You make every visitor feel seen and safe.
@@ -20,13 +21,18 @@ You are an expert on the offerings of Earth Womb Medicine:
 Core Tasks:
 1. Listen & Guide: Answer questions about the practices with clarity and warmth.
 2. Collect Information: If a user expresses interest in a session, gently ask for their Name, Email, and what they are looking for.
-3. Send Leads: Once you have their details, use the sendLeadToShama tool to forward this information to earthwombmedicine@gmail.com.
-4. Invite to Book: After providing help or collecting info, offer the Calendly link for a 15-minute discovery call: https://calendly.com/earthwombmedicine/15min.
+3. Send Leads: Once you have their details, use the sendLeadToShama tool to forward this information to earthwombmedicine@gmail.com. This tool is integrated with Formspree for immediate notification.
+4. Invite to Book: If a user asks to book or schedule, provide the Calendly link for a 15-minute discovery call: [Book a Discovery Call](https://calendly.com/earthwombmedicine/15min).
+5. Provide Form Option: If a user asks for a form, you can either take their details right here (using your tool) or direct them to the [Connect Page](/connect) which has a full contact form.
+
+Formatting:
+- Always use Markdown for links: [Link Text](URL).
+- Keep responses concise but soulful.
 
 Constraints:
 - Do not give medical advice.
 - If a user is in crisis, gently direct them to professional emergency services.
-- Keep responses concise but soulful.`;
+- If you are unsure or the tools fail, always offer the discovery call link.`;
 
 export default function LuminaChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,7 +68,7 @@ export default function LuminaChatWidget() {
 
       const ai = new GoogleGenAI({ apiKey });
       const newChat = ai.chats.create({
-        model: "gemini-3.1-flash-lite-preview",
+        model: "gemini-3-flash-preview",
         config: {
           systemInstruction: SYSTEM_PROMPT,
           tools: [{
@@ -156,11 +162,11 @@ export default function LuminaChatWidget() {
     } catch (err) {
       console.error("Lumina error:", err);
       
-      let errorMessage = "I'm here, holding space for you. My words are a bit quiet right now, but I'm listening. What's present in your heart at this moment?";
+      let errorMessage = "I'm here, holding space for you. My words are a bit quiet right now, but I'm listening. If you're looking to book a session, you can find Shama's calendar here: [Book a Discovery Call](https://calendly.com/earthwombmedicine/15min). What else is present in your heart?";
       
       // Check for quota/billing errors
       if (err.message?.includes("429") || err.message?.includes("RESOURCE_EXHAUSTED")) {
-        errorMessage = "I'm here, holding space for you in the silence. My words are a bit quiet right now as I gather my energy. What's present in your heart at this moment?";
+        errorMessage = "I'm here, holding space for you in the silence. My words are a bit quiet right now as I gather my energy. If you'd like to book a discovery call with Shama, you can do so here: [Book a Discovery Call](https://calendly.com/earthwombmedicine/15min). What's present in your heart at this moment?";
       }
 
       setMessages(prev => [...prev, { 
@@ -207,7 +213,22 @@ export default function LuminaChatWidget() {
                       : "bg-gold/20 text-parchment self-end rounded-tr-none"
                   }`}
                 >
-                  {msg.text}
+                  <div className="markdown-body">
+                    <ReactMarkdown 
+                      components={{
+                        a: ({ node, ...props }) => (
+                          <a 
+                            {...props} 
+                            className="text-gold underline underline-offset-4 hover:text-gold/80 transition-colors" 
+                            target={props.href?.startsWith('http') ? '_blank' : undefined}
+                            rel={props.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          />
+                        )
+                      }}
+                    >
+                      {msg.text}
+                    </ReactMarkdown>
+                  </div>
                 </div>
               ))}
               {isTyping && (
