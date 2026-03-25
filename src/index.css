@@ -92,7 +92,7 @@
   .italic.text-gold { font-size: 1.1em; }
 
   /* Prevent any text from being wider than viewport */
-  * { max-width: 100%; overflow-wrap: break-word; word-wrap: break-word; }
+  * { max-width: 100%; overflow-wrap: break-word; }
   
   /* Section breathing room */
   section { 
@@ -106,9 +106,9 @@
   .parchment-card { margin-left: 0; margin-right: 0; width: 100%; }
 }
 
-/* Prevent hero text overflow on all sizes */
+/* Prevent hero text overflow on all sizes without breaking words */
 .hero-title {
   overflow-wrap: break-word;
-  word-break: break-word;
-  hyphens: auto;
+  word-break: normal;
+  hyphens: none;
 }

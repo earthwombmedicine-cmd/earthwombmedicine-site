@@ -64,7 +64,7 @@ const Navbar = () => {
         className="h-auto"
       >
         <div 
-          className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-[56px] md:h-[64px] lg:h-[72px] gap-6 relative"
+          className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-[64px] md:h-[64px] lg:h-[72px] gap-6 relative"
         >
           {/* Subtle Jaguar Accents (Scrolled state only) */}
           {scrolled && (

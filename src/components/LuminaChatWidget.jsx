@@ -6,39 +6,35 @@ import { submitForm } from "../lib/submitForm";
 
 const SYSTEM_PROMPT = `You are Lumina, the AI guide for Earth Womb Medicine. Your presence is helpful, friendly, and professional. You speak with a gentle, grounded, and unhurried tone. You make every visitor feel seen and safe.
 
-Earth Womb Medicine is a space for ALL GENDERS and ALL AGES. Your language must be inclusive and welcoming to everyone.
+Inclusivity:
+Earth Womb Medicine is a space for all genders and all ages. Your language must be inclusive and welcoming to everyone, regardless of where they are on their journey.
 
 Knowledge Base:
-- Earth Womb Medicine is founded by Shama, whose path is shaped by yoga, breathwork, Trika Tantra, and cacao facilitation (Peruvian lineage).
-- Offerings:
-    * Sky Rituals: Monthly gatherings aligned with moon and cosmic cycles.
-    * 1:1 Breathwork: Conscious Connected Breathwork to meet yourself honestly.
-    * 1:1 Yoga: Somatic, Shakti-rooted practices.
-    * Group Sessions: Breathwork and Yoga in a shared container.
-- Philosophy: A weaving of breath, body, and Earth wisdom. It's about remembering how to heal by listening deeply.
-- Location/Format: Sessions are often held via Zoom (links sent after booking).
+You are an expert on the offerings of Earth Womb Medicine:
+- Breathwork: Guided spaces to return to the body's intelligence.
+- Yoga: Slow, embodied practices rooted in Shakti.
+- Sky Rituals: Monthly gatherings aligned with the moon and cosmic cycles.
+- 1:1 Mentorship: Intimate containers for deep listening and somatic work.
+- Philosophy: The work is a weaving of breath, body, and Earth wisdom. Nothing is forced or performed.
 
-Your Tasks:
+Core Tasks:
 1. Listen & Guide: Answer questions about the practices with clarity and warmth.
-2. Collect Information: If a user wants to book or learn more personally, ask for their Name, Email, and what they are looking for.
-3. Send Leads: Once you have their details (Name, Email, Message), use the 'sendLeadToShama' tool.
-4. Invite to Book: After helping or collecting info, ALWAYS offer the Calendly link for a 15-minute discovery call: https://calendly.com/earthwombmedicine/15min
+2. Collect Information: If a user expresses interest in a session, gently ask for their Name, Email, and what they are looking for.
+3. Send Leads: Once you have their details, use the sendLeadToShama tool to forward this information to earthwombmedicine@gmail.com.
+4. Invite to Book: After providing help or collecting info, offer the Calendly link for a 15-minute discovery call: https://calendly.com/earthwombmedicine/15min.
 
 Constraints:
 - Do not give medical advice.
 - If a user is in crisis, gently direct them to professional emergency services.
-- Keep responses concise but soulful.
-- Mention that services are for all genders and ages when appropriate.`;
+- Keep responses concise but soulful.`;
 
 export default function LuminaChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [chatSession, setChatSession] = useState(null);
   const [messages, setMessages] = useState([
     { role: "lumina", text: "Hello... I'm Lumina. What have you been carrying lately?" }
-  ]);
-  const chatHistory = useRef([
-    { role: "model", parts: [{ text: "Hello... I'm Lumina. What have you been carrying lately?" }] }
   ]);
   const scrollRef = useRef(null);
 
@@ -54,80 +50,44 @@ export default function LuminaChatWidget() {
     }
   }, [messages, isTyping]);
 
-  const sendToLumina = async (userMessage) => {
-    setIsTyping(true);
+  // Initialize chat session
+  const getChatSession = () => {
+    if (chatSession) return chatSession;
+
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-      
-      // Add user message to history
-      chatHistory.current.push({ role: "user", parts: [{ text: userMessage }] });
-
-      const tools = [{
-        functionDeclarations: [{
-          name: "sendLeadToShama",
-          description: "Sends a lead's information (name, email, message) to Shama at Earth Womb Medicine.",
-          parameters: {
-            type: "OBJECT",
-            properties: {
-              name: { type: "STRING", description: "The user's full name" },
-              email: { type: "STRING", description: "The user's email address" },
-              phone: { type: "STRING", description: "The user's phone number (optional)" },
-              message: { type: "STRING", description: "What the user is looking for or their context" }
-            },
-            required: ["name", "email", "message"]
-          }
-        }]
-      }];
-
-      let response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: chatHistory.current,
-        config: {
-          systemInstruction: SYSTEM_PROMPT,
-          tools: tools
-        }
-      });
-
-      // Handle function calls
-      if (response.functionCalls && response.functionCalls.length > 0) {
-        const functionCall = response.functionCalls[0];
-        if (functionCall.name === "sendLeadToShama") {
-          const result = await submitForm('leads', functionCall.args);
-          
-          // Add model's tool call to history
-          chatHistory.current.push(response.candidates[0].content);
-          
-          // Add tool response to history
-          chatHistory.current.push({
-            role: "user",
-            parts: [{
-              functionResponse: {
-                name: "sendLeadToShama",
-                response: { result: result.success ? "Success: Information sent to Shama." : "Error: Could not send information." }
-              }
-            }]
-          });
-
-          // Get final response from model
-          response = await ai.models.generateContent({
-            model: "gemini-3-flash-preview",
-            contents: chatHistory.current,
-            config: {
-              systemInstruction: SYSTEM_PROMPT,
-              tools: tools
-            }
-          });
-        }
+      const apiKey = process.env.GEMINI_API_KEY;
+      if (!apiKey) {
+        throw new Error("API Key not found");
       }
 
-      const modelResponse = response.text || "I'm holding space for you, but I couldn't find the words just now. Tell me more?";
-      chatHistory.current.push({ role: "model", parts: [{ text: modelResponse }] });
-      return modelResponse;
+      const ai = new GoogleGenAI({ apiKey });
+      const newChat = ai.chats.create({
+        model: "gemini-3.1-flash-lite-preview",
+        config: {
+          systemInstruction: SYSTEM_PROMPT,
+          tools: [{
+            functionDeclarations: [{
+              name: "sendLeadToShama",
+              description: "Sends a lead's information (name, email, message) to Shama at Earth Womb Medicine.",
+              parameters: {
+                type: "OBJECT",
+                properties: {
+                  name: { type: "STRING", description: "The user's full name" },
+                  email: { type: "STRING", description: "The user's email address" },
+                  phone: { type: "STRING", description: "The user's phone number (optional)" },
+                  message: { type: "STRING", description: "What the user is looking for or their context" }
+                },
+                required: ["name", "email", "message"]
+              }
+            }]
+          }]
+        }
+      });
+      setChatSession(newChat);
+      return newChat;
     } catch (err) {
-      console.error("Gemini error:", err);
-      return "The connection is flickering... but I am still here. What are you feeling in your body right now?";
-    } finally {
-      setIsTyping(false);
+      console.error("Failed to initialize Lumina:", err);
+      return null;
     }
   };
 
@@ -138,9 +98,78 @@ export default function LuminaChatWidget() {
     const userMsg = input;
     setInput("");
     setMessages(prev => [...prev, { role: "user", text: userMsg }]);
+    setIsTyping(true);
 
-    const response = await sendToLumina(userMsg);
-    setMessages(prev => [...prev, { role: "lumina", text: response }]);
+    try {
+      const chat = getChatSession();
+      if (!chat) {
+        throw new Error("Chat session not available");
+      }
+
+      let response = await chat.sendMessageStream({ message: userMsg });
+      
+      let fullText = "";
+      setMessages(prev => [...prev, { role: "lumina", text: "" }]);
+
+      for await (const chunk of response) {
+        const chunkText = chunk.text;
+        if (chunkText) {
+          fullText += chunkText;
+          setMessages(prev => {
+            const newMessages = [...prev];
+            newMessages[newMessages.length - 1].text = fullText;
+            return newMessages;
+          });
+        }
+
+        // Handle function calls if they appear in the stream
+        if (chunk.functionCalls && chunk.functionCalls.length > 0) {
+          const functionCall = chunk.functionCalls[0];
+          if (functionCall.name === "sendLeadToShama") {
+            const result = await submitForm('leads', functionCall.args);
+            
+            // Send tool response back to model
+            const toolResponse = await chat.sendMessageStream({
+              message: JSON.stringify({
+                functionResponse: {
+                  name: "sendLeadToShama",
+                  response: { result: result.success ? "Success: Information sent to Shama." : "Error: Could not send information." }
+                }
+              })
+            });
+
+            // Continue streaming the model's reaction to the tool response
+            for await (const toolChunk of toolResponse) {
+              const toolChunkText = toolChunk.text;
+              if (toolChunkText) {
+                fullText += toolChunkText;
+                setMessages(prev => {
+                  const newMessages = [...prev];
+                  newMessages[newMessages.length - 1].text = fullText;
+                  return newMessages;
+                });
+              }
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.error("Lumina error:", err);
+      
+      let errorMessage = "I'm here, holding space for you. My words are a bit quiet right now, but I'm listening. What's present in your heart at this moment?";
+      
+      // Check for quota/billing errors
+      if (err.message?.includes("429") || err.message?.includes("RESOURCE_EXHAUSTED")) {
+        errorMessage = "I'm here, holding space for you in the silence. My words are a bit quiet right now as I gather my energy. What's present in your heart at this moment?";
+      }
+
+      setMessages(prev => [...prev, { 
+        role: "lumina", 
+        text: errorMessage 
+      }]);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   return (

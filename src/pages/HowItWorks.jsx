@@ -102,7 +102,7 @@ export default function HowItWorks() {
               alt="Contemplative portrait reflecting somatic awareness"
               shape="portrait"
               className="w-full max-w-md aspect-[2/3]"
-              objectFit="contain"
+              objectFit="cover"
             />
           </div>
           
@@ -130,7 +130,7 @@ export default function HowItWorks() {
                   Every experience we move through leaves a trace. Not only in memory.
                 </p>
                 <p>
-                  But within the body itself: in the muscles, and in the deeper layers of tissue that quietly hold our stories. The heart can carry grief.
+                  But within the body itself... in the muscles, and in the deeper layers of tissue that quietly hold our stories. The heart can carry grief.
                 </p>
                 <p>
                   The solar plexus, that familiar tightening in the stomach, can hold fear, doubt, and the things we never quite found words for. The throat can hold the voice we once learned to quiet.
@@ -198,7 +198,7 @@ export default function HowItWorks() {
                   The breath is a living current. A continuous, circular rhythm that becomes a quiet portal back into the body.
                 </p>
                 <p>
-                  As the breath deepens, the nervous system begins to soften and the body slowly remembers its own wisdom. The mind grows quieter, and awareness settles into a deeper place: a threshold where healing can begin to unfold. What has been held in muscle, fascia, and feeling over the years slowly begins to loosen and rise.
+                  As the breath deepens, the nervous system begins to soften and the body slowly remembers its own wisdom. The mind grows quieter, and awareness settles into a deeper place - a threshold where healing can begin to unfold. What has been held in muscle, fascia, and feeling over the years slowly begins to loosen and rise.
                 </p>
                 <p>
                   This is deeply energetic work. As the breath moves, energy that has been held or stagnant begins to flow again through the body.
@@ -324,7 +324,7 @@ export default function HowItWorks() {
                   Yog is the path of union, where breath, body, mind, and spirit return to relationship with one another.
                 </p>
                 <p>
-                  After more than seventeen years of practice and teaching, this work has become a deeply embodied approach to yoga that honours the real body: a body that changes, evolves, and carries the imprint of life.
+                  After more than 15 years of practice and teaching, this work has become a deeply embodied approach to yoga that honours the real body, a body that changes, evolves, and carries the imprint of life.
                 </p>
                 <p>
                   Through grounded movement using your own body weight, the practice builds stability in the hips, spine, and legs, strengthening the body from its foundation. While all energetic centres of the body are essential and interconnected, this work begins by restoring strength and stability in the lower centres: the root and sacral, where our sense of safety, vitality, and belonging are first established.
@@ -353,6 +353,7 @@ export default function HowItWorks() {
                 className="w-full max-w-md mx-auto aspect-[3/4] shadow-2xl"
                 loading="lazy"
                 shape="portrait"
+                objectFit="cover"
               />
             </SectionReveal>
           </div>
@@ -367,7 +368,7 @@ export default function HowItWorks() {
           <div className="w-full lg:w-5/12 order-1">
             <SectionReveal>
               <PortalImage 
-                src="https://ik.imagekit.io/eufixlduid/Picflow%20Images%20Mar%2025/DSC08782.webp" 
+                src="https://ik.imagekit.io/eufixlduid/IMG_2203.PNG" 
                 alt="Mystical forest reflecting shamanic connection to nature" 
                 className="w-full max-w-md mx-auto aspect-[3/4] shadow-2xl"
                 loading="lazy"
@@ -393,7 +394,7 @@ export default function HowItWorks() {
                     Shamanism is a way of remembering our relationship with the living world, not as something separate from us, but as a living web of which we are a part. It is the slow return to relationship with the body, with the Earth, with the unseen forces that shape our lives, and with the deeper intelligence moving through all things.
                   </p>
                   <p>
-                    Through ritual, plant intelligence, ancestral healing, and the guidance of power animals, we begin to listen again. We learn to turn gently toward the places within us that have been hidden, rejected, or silenced: the grief that was never given space, the anger that was taught to stay quiet, the parts of ourselves we learned to abandon in order to belong.
+                    Through ritual, plant intelligence, ancestral healing, and the guidance of power animals, we begin to listen again. We learn to turn gently toward the places within us that have been hidden, rejected, or silenced - the grief that was never given space, the anger that was taught to stay quiet, the parts of ourselves we learned to abandon in order to belong.
                   </p>
                   <p>
                     This work is not about fixing what is broken. It is about remembering what has always been whole.

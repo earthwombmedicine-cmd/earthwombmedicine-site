@@ -17,7 +17,7 @@ const Logo = ({ className = "", variant = "navbar", onClick, light = false }) =>
   
   const logoHeight = isStacked 
     ? "h-12 md:h-16 lg:h-20" 
-    : "h-6 md:h-8 lg:h-10";
+    : "h-10 md:h-8 lg:h-10";
 
   return (
     <Link 

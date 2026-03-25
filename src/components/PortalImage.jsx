@@ -33,9 +33,10 @@ export default function PortalImage({
       transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
     >
       <motion.div
-        className="w-full h-full"
+        className="w-full h-[calc(100%+20px)] relative"
+        style={{ top: -10 }}
         animate={{
-          y: [0, -10, 0],
+          y: [0, 10, 0],
         }}
         transition={{ 
           duration: 6, 

@@ -209,7 +209,7 @@ export default function Offerings() {
               alt="Ancient wisdom and nature"
               shape="portrait"
               className="w-full max-w-md aspect-[2/3]"
-              objectFit="contain"
+              objectFit="cover"
             />
           </div>
           

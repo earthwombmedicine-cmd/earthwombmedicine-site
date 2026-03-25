@@ -113,7 +113,7 @@ export default function Home() {
               YOGA · BREATHWORK · SHAMANIC PRACTICES
             </span>
 
-            <h1 className="font-heading text-parchment text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-normal leading-tight mb-8 hero-title">
+            <h1 className="font-heading text-parchment text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal leading-tight mb-8 hero-title">
               The earth beneath you is alive.. it senses you as you arrive
             </h1>
             
