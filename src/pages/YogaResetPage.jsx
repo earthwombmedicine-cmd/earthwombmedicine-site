@@ -23,28 +23,20 @@ export default function YogaResetPage() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus('loading');
+    
+    // Trigger submission in background (parallelly)
+    submitForm('leads', {
+      name: formState.name,
+      email: formState.email,
+      phone: formState.whatsapp,
+      tag: 'yoga',
+      message: 'Yoga Reset Access Request'
+    }).catch(err => console.error("Parallel submission failed:", err));
 
-    try {
-      const result = await submitForm('leads', {
-        name: formState.name,
-        email: formState.email,
-        phone: formState.whatsapp,
-        tag: 'yoga',
-        message: 'Yoga Reset Access Request'
-      });
-
-      if (result.success) {
-        navigate('/yoga-reset-video');
-      } else {
-        setStatus('error');
-      }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      setStatus('error');
-    }
+    // Redirect immediately
+    navigate('/yoga-reset-video');
   };
 
   const handleChange = (e) => {
@@ -64,7 +56,7 @@ export default function YogaResetPage() {
         <JaguarPrintField variant="forest" count={8} opacity={0.3} />
         
         {/* MINIMAL TOP BAR */}
-        <div className="pt-8 flex justify-center items-center px-6 relative z-20">
+        <div className="pt-4 md:pt-6 flex justify-center items-center px-6 relative z-20">
           <Logo variant="hero" light={true} />
         </div>
 

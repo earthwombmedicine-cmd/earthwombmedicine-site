@@ -41,7 +41,7 @@ export default function YogaResetVideoPage() {
       </Helmet>
 
       {/* MINIMAL TOP BAR */}
-      <div className="pt-8 flex justify-center items-center px-6 relative z-20">
+      <div className="pt-4 md:pt-6 flex justify-center items-center px-6 relative z-20">
         <Logo variant="hero" light={true} />
       </div>
 

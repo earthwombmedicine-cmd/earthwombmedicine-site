@@ -19,11 +19,11 @@ const Logo = ({ className = "", variant = "navbar", onClick, light = false }) =>
   const showIcon = variant !== "navbar";
 
   const logoHeight = isStacked 
-    ? "h-12 md:h-16 lg:h-20" 
+    ? "h-12 md:h-16 lg:h-18" 
     : "h-10 md:h-8 lg:h-10";
 
   const iconHeight = isStacked
-    ? "h-16 md:h-20 lg:h-24"
+    ? "h-12 md:h-16 lg:h-20"
     : "h-8 md:h-10";
 
   return (
@@ -36,7 +36,7 @@ const Logo = ({ className = "", variant = "navbar", onClick, light = false }) =>
         <img 
           src={iconSrc} 
           alt="Icon"
-          className={`${iconHeight} w-auto object-contain transition-opacity group-hover:opacity-80 mb-2 md:mb-0`}
+          className={`${iconHeight} w-auto object-contain transition-opacity group-hover:opacity-80`}
           referrerPolicy="no-referrer"
         />
       )}
