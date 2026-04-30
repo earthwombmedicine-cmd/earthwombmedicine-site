@@ -13,6 +13,8 @@ import MyStory from "./pages/MyStory.jsx";
 import HowItWorks from "./pages/HowItWorks.jsx";
 import TransformationStories from "./pages/TransformationStories.jsx";
 import Connect from "./pages/Connect.jsx";
+import YogaResetPage from "./pages/YogaResetPage.jsx";
+import YogaResetVideoPage from "./pages/YogaResetVideoPage.jsx";
 
 function Layout() {
   return (
@@ -42,6 +44,10 @@ export default function App() {
       <Router>
         <ScrollToTop />
         <Routes>
+          {/* Funnel Pages - Standalone - Place at top to avoid "/" catch-all matching logic issues */}
+          <Route path="/yoga-reset" element={<YogaResetPage />} />
+          <Route path="/yoga-reset-video" element={<YogaResetVideoPage />} />
+
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="my-story" element={<MyStory />} />
